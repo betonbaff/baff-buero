@@ -1,4 +1,3 @@
-
 stages:
 - name: Publish
   steps:
@@ -6,7 +5,15 @@ stages:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: example-baff-buero:${CICD_EXECUTION_SEQUENCE}
+  when:
+    branch: {}
 - name: Deploy
   steps:
   - applyYamlConfig:
       path: ./build/deployment.yaml
+  when:
+    branch: {}
+branch:
+  include:
+  - master
+notification: {}
